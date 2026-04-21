@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abioye Jesse Fredrick — Java Backend Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a18; --ink2: #4a4a46; --ink3: #8a8a84;
+    --bg: #f5f3ee; --bg2: #edeae2;
+    --accent: #1D9E75; --accent-light: #E1F5EE; --accent-dark: #085041;
+    --border: rgba(0,0,0,0.10);
+    --serif: 'DM Serif Display', serif;
+    --sans: 'Manrope', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+  body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.7; font-size: 15px; }
+  a { color: inherit; text-decoration: none; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(245,243,238,0.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw; height: 56px;
+  }
+  .nav-logo { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--ink2); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--ink2); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  main { max-width: 860px; margin: 0 auto; padding: 0 5vw 80px; }
+
+  .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+    color: var(--accent-dark); background: var(--accent-light);
+    padding: 4px 12px; border-radius: 100px; margin-bottom: 24px;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: block; }
+  h1 { font-family: var(--serif); font-size: clamp(36px, 6vw, 56px); line-height: 1.1; font-weight: 400; margin-bottom: 20px; }
+  .hero-sub { font-size: 16px; color: var(--ink2); max-width: 560px; line-height: 1.8; margin-bottom: 36px; }
+  .hero-links { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--sans); font-size: 13px; font-weight: 600;
+    padding: 9px 20px; border-radius: 6px;
+    border: 1.5px solid var(--accent); transition: all 0.18s;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+  .btn-ghost { background: transparent; color: var(--accent-dark); }
+  .btn-ghost:hover { background: var(--accent-light); }
+
+  section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+  .section-label {
+    font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.10em;
+    color: var(--ink3); text-transform: uppercase; margin-bottom: 32px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* EDUCATION FEATURE CARD */
+  .edu-feature {
+    background: var(--accent-dark);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .edu-feature::before {
+    content: '∫∂∑';
+    position: absolute; right: 24px; top: 50%; transform: translateY(-50%);
+    font-family: var(--serif); font-size: 72px; color: rgba(255,255,255,0.06);
+    letter-spacing: -4px; pointer-events: none;
+  }
+  .edu-feature-label {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.10em; color: rgba(255,255,255,0.5);
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .edu-feature-title {
+    font-family: var(--serif); font-size: 26px; color: #fff;
+    font-weight: 400; margin-bottom: 6px;
+  }
+  .edu-feature-inst {
+    font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px;
+  }
+  .edu-feature-body {
+    font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.8;
+    max-width: 580px; margin-bottom: 20px;
+  }
+  .edu-areas {
+    display: flex; flex-wrap: wrap; gap: 7px;
+  }
+  .edu-area {
+    font-family: var(--mono); font-size: 11px;
+    background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.75);
+    padding: 4px 11px; border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .edu-engine-callout {
+    margin-top: 20px;
+    background: rgba(255,255,255,0.07);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.7;
+  }
+  .edu-engine-callout strong { color: #fff; font-weight: 600; }
+
+  .edu-secondary {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 10px; padding: 22px 26px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  }
+  .edu-secondary-title { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .edu-secondary-sub { font-size: 13px; color: var(--ink2); }
+  .edu-secondary-badge {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    background: var(--accent-light); color: var(--accent-dark);
+    padding: 4px 12px; border-radius: 100px; white-space: nowrap;
+  }
+
+  /* PROJECTS */
+  .projects-grid { display: flex; flex-direction: column; gap: 20px; }
+  .project-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 10px; padding: 28px 28px 22px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .project-card:hover { border-color: var(--accent); box-shadow: 0 4px 24px rgba(29,158,117,0.08); }
+  .project-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 12px; }
+  .project-title { font-family: var(--serif); font-size: 20px; font-weight: 400; line-height: 1.3; }
+  .project-year { font-family: var(--mono); font-size: 11px; color: var(--ink3); white-space: nowrap; margin-top: 4px; }
+  .project-desc { font-size: 14px; color: var(--ink2); line-height: 1.75; margin-bottom: 18px; }
+  .project-bullets { margin: 0 0 18px 0; padding: 0; list-style: none; }
+  .project-bullets li {
+    font-size: 13px; color: var(--ink2); padding: 4px 0 4px 16px;
+    position: relative; border-bottom: 0.5px solid var(--bg2);
+  }
+  .project-bullets li:last-child { border-bottom: none; }
+  .project-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; top: 5px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-family: var(--mono); font-size: 11px; font-weight: 500; background: var(--bg2); color: var(--ink2); padding: 3px 10px; border-radius: 100px; border: 1px solid var(--border); }
+  .tag.accent { background: var(--accent-light); color: var(--accent-dark); border-color: transparent; }
+  .project-link { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--accent); margin-top: 14px; transition: gap 0.15s; }
+  .project-link:hover { gap: 8px; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .skill-group { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; }
+  .skill-group-title { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent-dark); letter-spacing: 0.06em; margin-bottom: 12px; }
+  .skill-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-pill { font-size: 12px; color: var(--ink2); background: var(--bg); padding: 3px 10px; border-radius: 100px; border: 1px solid var(--border); }
+
+  /* CONTACT */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .about-text { font-size: 15px; color: var(--ink2); line-height: 1.85; }
+  .contact-block { display: flex; flex-direction: column; gap: 14px; }
+  .contact-item { display: flex; align-items: center; gap: 12px; }
+  .contact-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .contact-label { font-size: 11px; color: var(--ink3); font-family: var(--mono); }
+  .contact-value { font-size: 14px; font-weight: 500; color: var(--accent-dark); }
+
+  footer { text-align: center; padding: 32px 5vw; font-family: var(--mono); font-size: 11px; color: var(--ink3); border-top: 1px solid var(--border); }
+
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .project-header { flex-direction: column; }
+    .nav-links { gap: 16px; }
+    .edu-secondary { flex-direction: column; align-items: flex-start; }
+    .edu-feature { padding: 24px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">jesse.fredrick</span>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="hero-tag">Open to opportunities · Remote / Relocation</div>
+    <h1>Abioye Jesse<br>Fredrick</h1>
+    <p class="hero-sub">Java backend developer with a Mathematics degree — building secure, distributed systems and documenting every architectural decision: what was chosen, what was rejected, and why. Strong foundation in formal reasoning applied directly to software design.</p>
+    <div class="hero-links">
+      <a class="btn btn-primary" href="https://github.com/Kunzoick" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/jesse-fredrick-aab48b242" target="_blank">LinkedIn</a>
+      <a class="btn btn-ghost" href="mailto:jesseyfredrick03@yahoo.com">Email</a>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-label">Selected Projects</div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-header">
+          <div><div class="project-title">Trust-Aware Incident Intelligence API</div></div>
+          <span class="project-year">2026</span>
+        </div>
+        <p class="project-desc">REST API where every request is evaluated by both role and behavioural trust score. The architectural core — role and trust score never influence each other — is enforced as a hard constraint, not a convention.</p>
+        <ul class="project-bullets">
+          <li>JWT auth with 5-min TTL; opaque refresh tokens hashed SHA-256; token reuse detection revokes the entire family atomically</li>
+          <li>Redis rate limiting across four trust tiers — fail-open by design; auth has zero Redis dependency</li>
+          <li>Transactional outbox: incident event and outbox row written in one transaction, survives broker failure</li>
+          <li>Correlation ID traces every request across filters, services, error responses, and audit logs</li>
+          <li>Flyway owns the schema (V1–V8); Hibernate DDL disabled</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag accent">Java 23</span><span class="tag">Spring Boot 3.5</span><span class="tag">MariaDB</span><span class="tag">Redis</span><span class="tag">RabbitMQ</span><span class="tag">JWT</span>
+        </div>
+        <a class="project-link" href="https://github.com/Kunzoick" target="_blank">View on GitHub ↗</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div><div class="project-title">Async Incident Processing Pipeline</div></div>
+          <span class="project-year">2026</span>
+        </div>
+        <p class="project-desc">Event-driven consumer for incident events. Six failure scenarios explicitly handled — each with a documented recovery path verified by database query.</p>
+        <ul class="project-bullets">
+          <li>Exponential backoff at 2s / 4s / 8s; messages exceeding 3 attempts routed to DLQ and marked DEAD</li>
+          <li>ProcessingWatchdog detects records stuck in PROCESSING beyond 8s and requeues them</li>
+          <li>Idempotency via eventId uniqueness — duplicates acknowledged and skipped</li>
+          <li>ADRs written for broker choice, retry strategy, idempotency, and outbox integration</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag accent">Java 21</span><span class="tag">Spring Boot 3.5</span><span class="tag">RabbitMQ</span><span class="tag">MariaDB</span><span class="tag">Docker</span>
+        </div>
+        <a class="project-link" href="https://github.com/Kunzoick" target="_blank">View on GitHub ↗</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div><div class="project-title">Calculus API — Symbolic Math Engine</div></div>
+          <span class="project-year">2026</span>
+        </div>
+        <p class="project-desc">REST API exposing a symbolic mathematics engine built entirely from scratch — no external math libraries. A direct application of undergraduate analysis: hand-coded from theory to deployed API.</p>
+        <ul class="project-bullets">
+          <li>Hand-coded tokenizer, recursive descent parser, AST, differentiator, integrator, simplifier, and printer</li>
+          <li>Supports differentiation, integration by parts, implicit differentiation, variable exponents, and inverse trig</li>
+          <li>Engine is fully testable in isolation without starting the Spring context</li>
+          <li>Live public frontend deployed on Railway</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag accent">Java 21</span><span class="tag">Spring Boot 3.4</span><span class="tag">Railway</span><span class="tag">HTML/CSS/JS</span>
+        </div>
+        <a class="project-link" href="https://calculus-api-production.up.railway.app" target="_blank">Live Demo ↗</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div><div class="project-title">Student Management System</div></div>
+          <span class="project-year">2025</span>
+        </div>
+        <p class="project-desc">Desktop application managing the full academic lifecycle across a multi-admin institution — built without Spring, Hibernate, or any ORM.</p>
+        <ul class="project-bullets">
+          <li>Four strict layers: UI → Service → DAO → Database; SwingWorker threading across 20 frames — EDT never blocks</li>
+          <li>Multi-admin isolation enforced at SQL level via adminId sentinel pattern — eliminates a class of data leakage bugs</li>
+          <li>Full code review: 15 critical and 8 high-severity bugs identified, root-caused, and documented</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag accent">Java 17</span><span class="tag">Swing</span><span class="tag">JDBC</span><span class="tag">MySQL</span>
+        </div>
+        <a class="project-link" href="https://github.com/Kunzoick" target="_blank">View on GitHub ↗</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-label">Education</div>
+
+    <div class="edu-feature">
+      <div class="edu-feature-label">B.Sc. (Ed) Pure Mathematics · Completed · 2025</div>
+      <div class="edu-feature-title">Pure Mathematics Degree</div>
+      <div class="edu-feature-inst">University — Graduated 2025</div>
+      <p class="edu-feature-body">
+        A rigorous foundation in formal mathematical reasoning — the same discipline that underpins type systems, algorithm correctness, and AI model evaluation. Core areas span both pure theory and applied mathematics.
+      </p>
+      <div class="edu-areas">
+        <span class="edu-area">Abstract Algebra</span>
+        <span class="edu-area">Linear Algebra</span>
+        <span class="edu-area">Real Analysis</span>
+        <span class="edu-area">Complex Analysis</span>
+        <span class="edu-area">Functional Analysis</span>
+        <span class="edu-area">Topology</span>
+        <span class="edu-area">ODE &amp; PDE</span>
+        <span class="edu-area">Probability</span>
+        <span class="edu-area">Statistics</span>
+        <span class="edu-area">Applied Mathematics</span>
+      </div>
+      <div class="edu-engine-callout">
+        <strong>Applied directly:</strong> Built a symbolic calculus engine in Java as a hands-on extension of undergraduate analysis — hand-coded differentiator, integrator, and AST with no external libraries. Theory translated into working, deployed software.
+      </div>
+    </div>
+
+    <div class="edu-secondary">
+      <div>
+        <div class="edu-secondary-title">Diploma in Java Development</div>
+        <div class="edu-secondary-sub">NIIT Institute · In Progress — Core language, OOP, and application development</div>
+      </div>
+      <span class="edu-secondary-badge">In Progress</span>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-label">Technical Skills</div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-list"><span class="skill-pill">Java 23/21/17</span><span class="skill-pill">SQL</span><span class="skill-pill">JavaScript</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Frameworks</div>
+        <div class="skill-list"><span class="skill-pill">Spring Boot 3.5</span><span class="skill-pill">Spring Security</span><span class="skill-pill">Spring Data JPA</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Databases & Messaging</div>
+        <div class="skill-list"><span class="skill-pill">MariaDB</span><span class="skill-pill">MySQL</span><span class="skill-pill">Flyway</span><span class="skill-pill">RabbitMQ</span><span class="skill-pill">Redis</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Auth & Security</div>
+        <div class="skill-list"><span class="skill-pill">JWT</span><span class="skill-pill">Opaque Tokens</span><span class="skill-pill">Token Reuse Detection</span><span class="skill-pill">RBAC</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Infrastructure</div>
+        <div class="skill-list"><span class="skill-pill">Docker</span><span class="skill-pill">Railway</span><span class="skill-pill">Maven</span><span class="skill-pill">Git</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Concepts</div>
+        <div class="skill-list"><span class="skill-pill">Distributed Systems</span><span class="skill-pill">Event-Driven Arch</span><span class="skill-pill">Idempotency</span><span class="skill-pill">ADRs</span><span class="skill-pill">Failure Semantics</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-label">About & Contact</div>
+    <div class="two-col">
+      <div>
+        <p class="about-text">Mathematics degree. Backend engineering. Every decision documented.<br><br>I bring formal reasoning from pure mathematics into software design — not as a talking point, but as a working habit. Correctness is argued, not assumed. That applies to code, architecture, and how I communicate technical ideas to others.<br><br>Open to backend and AI training roles where analytical rigour and clear technical documentation are valued.</p>
+      </div>
+      <div class="contact-block">
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <a href="mailto:jesseyfredrick03@yahoo.com" class="contact-value">jesseyfredrick03@yahoo.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--ink2)"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">GitHub</div>
+            <a href="https://github.com/Kunzoick" target="_blank" class="contact-value">github.com/Kunzoick</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">in</div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <a href="https://linkedin.com/in/jesse-fredrick-aab48b242" target="_blank" class="contact-value">jesse-fredrick</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Built with HTML · Hosted on GitHub Pages · github.com/Kunzoick
+</footer>
+
+</body>
+</html>
