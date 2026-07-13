@@ -2,392 +2,416 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Abioye Jesse Fredrick — Java Backend Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet"/>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --ink: #1a1a18; --ink2: #4a4a46; --ink3: #8a8a84;
-    --bg: #f5f3ee; --bg2: #edeae2;
-    --accent: #1D9E75; --accent-light: #E1F5EE; --accent-dark: #085041;
-    --border: rgba(0,0,0,0.10);
-    --serif: 'DM Serif Display', serif;
-    --sans: 'Manrope', sans-serif;
-    --mono: 'DM Mono', monospace;
-  }
-  body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.7; font-size: 15px; }
-  a { color: inherit; text-decoration: none; }
-
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(245,243,238,0.92); backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5vw; height: 56px;
-  }
-  .nav-logo { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--ink2); }
-  .nav-links { display: flex; gap: 28px; }
-  .nav-links a { font-size: 13px; font-weight: 500; color: var(--ink2); transition: color 0.2s; }
-  .nav-links a:hover { color: var(--accent); }
-
-  main { max-width: 860px; margin: 0 auto; padding: 0 5vw 80px; }
-
-  .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); }
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
-    color: var(--accent-dark); background: var(--accent-light);
-    padding: 4px 12px; border-radius: 100px; margin-bottom: 24px;
-  }
-  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: block; }
-  h1 { font-family: var(--serif); font-size: clamp(36px, 6vw, 56px); line-height: 1.1; font-weight: 400; margin-bottom: 20px; }
-  .hero-sub { font-size: 16px; color: var(--ink2); max-width: 560px; line-height: 1.8; margin-bottom: 36px; }
-  .hero-links { display: flex; flex-wrap: wrap; gap: 12px; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 7px;
-    font-family: var(--sans); font-size: 13px; font-weight: 600;
-    padding: 9px 20px; border-radius: 6px;
-    border: 1.5px solid var(--accent); transition: all 0.18s;
-  }
-  .btn-primary { background: var(--accent); color: #fff; }
-  .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
-  .btn-ghost { background: transparent; color: var(--accent-dark); }
-  .btn-ghost:hover { background: var(--accent-light); }
-
-  section { padding: 56px 0; border-bottom: 1px solid var(--border); }
-  .section-label {
-    font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.10em;
-    color: var(--ink3); text-transform: uppercase; margin-bottom: 32px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-  /* EDUCATION FEATURE CARD */
-  .edu-feature {
-    background: var(--accent-dark);
-    border-radius: 12px;
-    padding: 32px 36px;
-    margin-bottom: 20px;
-    position: relative;
-    overflow: hidden;
-  }
-  .edu-feature::before {
-    content: '∫∂∑';
-    position: absolute; right: 24px; top: 50%; transform: translateY(-50%);
-    font-family: var(--serif); font-size: 72px; color: rgba(255,255,255,0.06);
-    letter-spacing: -4px; pointer-events: none;
-  }
-  .edu-feature-label {
-    font-family: var(--mono); font-size: 11px; font-weight: 500;
-    letter-spacing: 0.10em; color: rgba(255,255,255,0.5);
-    text-transform: uppercase; margin-bottom: 10px;
-  }
-  .edu-feature-title {
-    font-family: var(--serif); font-size: 26px; color: #fff;
-    font-weight: 400; margin-bottom: 6px;
-  }
-  .edu-feature-inst {
-    font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px;
-  }
-  .edu-feature-body {
-    font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.8;
-    max-width: 580px; margin-bottom: 20px;
-  }
-  .edu-areas {
-    display: flex; flex-wrap: wrap; gap: 7px;
-  }
-  .edu-area {
-    font-family: var(--mono); font-size: 11px;
-    background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.75);
-    padding: 4px 11px; border-radius: 100px;
-    border: 1px solid rgba(255,255,255,0.15);
-  }
-  .edu-engine-callout {
-    margin-top: 20px;
-    background: rgba(255,255,255,0.07);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 8px 8px 0;
-    padding: 14px 18px;
-    font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.7;
-  }
-  .edu-engine-callout strong { color: #fff; font-weight: 600; }
-
-  .edu-secondary {
-    background: #fff; border: 1px solid var(--border);
-    border-radius: 10px; padding: 22px 26px;
-    display: flex; justify-content: space-between; align-items: center; gap: 16px;
-  }
-  .edu-secondary-title { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
-  .edu-secondary-sub { font-size: 13px; color: var(--ink2); }
-  .edu-secondary-badge {
-    font-family: var(--mono); font-size: 11px; font-weight: 500;
-    background: var(--accent-light); color: var(--accent-dark);
-    padding: 4px 12px; border-radius: 100px; white-space: nowrap;
-  }
-
-  /* PROJECTS */
-  .projects-grid { display: flex; flex-direction: column; gap: 20px; }
-  .project-card {
-    background: #fff; border: 1px solid var(--border);
-    border-radius: 10px; padding: 28px 28px 22px;
-    transition: box-shadow 0.2s, border-color 0.2s;
-  }
-  .project-card:hover { border-color: var(--accent); box-shadow: 0 4px 24px rgba(29,158,117,0.08); }
-  .project-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 12px; }
-  .project-title { font-family: var(--serif); font-size: 20px; font-weight: 400; line-height: 1.3; }
-  .project-year { font-family: var(--mono); font-size: 11px; color: var(--ink3); white-space: nowrap; margin-top: 4px; }
-  .project-desc { font-size: 14px; color: var(--ink2); line-height: 1.75; margin-bottom: 18px; }
-  .project-bullets { margin: 0 0 18px 0; padding: 0; list-style: none; }
-  .project-bullets li {
-    font-size: 13px; color: var(--ink2); padding: 4px 0 4px 16px;
-    position: relative; border-bottom: 0.5px solid var(--bg2);
-  }
-  .project-bullets li:last-child { border-bottom: none; }
-  .project-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; top: 5px; }
-  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag { font-family: var(--mono); font-size: 11px; font-weight: 500; background: var(--bg2); color: var(--ink2); padding: 3px 10px; border-radius: 100px; border: 1px solid var(--border); }
-  .tag.accent { background: var(--accent-light); color: var(--accent-dark); border-color: transparent; }
-  .project-link { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--accent); margin-top: 14px; transition: gap 0.15s; }
-  .project-link:hover { gap: 8px; }
-
-  /* SKILLS */
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-  .skill-group { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; }
-  .skill-group-title { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent-dark); letter-spacing: 0.06em; margin-bottom: 12px; }
-  .skill-list { display: flex; flex-wrap: wrap; gap: 6px; }
-  .skill-pill { font-size: 12px; color: var(--ink2); background: var(--bg); padding: 3px 10px; border-radius: 100px; border: 1px solid var(--border); }
-
-  /* CONTACT */
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-  .about-text { font-size: 15px; color: var(--ink2); line-height: 1.85; }
-  .contact-block { display: flex; flex-direction: column; gap: 14px; }
-  .contact-item { display: flex; align-items: center; gap: 12px; }
-  .contact-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
-  .contact-label { font-size: 11px; color: var(--ink3); font-family: var(--mono); }
-  .contact-value { font-size: 14px; font-weight: 500; color: var(--accent-dark); }
-
-  footer { text-align: center; padding: 32px 5vw; font-family: var(--mono); font-size: 11px; color: var(--ink3); border-top: 1px solid var(--border); }
-
-  @media (max-width: 600px) {
-    .two-col { grid-template-columns: 1fr; }
-    .project-header { flex-direction: column; }
-    .nav-links { gap: 16px; }
-    .edu-secondary { flex-direction: column; align-items: flex-start; }
-    .edu-feature { padding: 24px 22px; }
-  }
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="author" content="Jesse Abioye" />
+<title>Kunzoick — Backend Engineer</title>
+<meta name="description" content="Backend engineer working mostly in Java and Spring Boot." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<div id="progress"></div>
+
 <nav>
-  <span class="nav-logo">jesse.fredrick</span>
-  <div class="nav-links">
-    <a href="#projects">Projects</a>
-    <a href="#education">Education</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
+  <div class="nav-inner">
+    <div class="prompt-mark"><span class="sym">~$</span> kunzoick</div>
+    <div class="tabs">
+      <a class="tab active" href="#about"><span class="dot" style="background:var(--blue)"></span><span class="label">about.md</span></a>
+      <a class="tab" href="#projects"><span class="dot" style="background:var(--green)"></span><span class="label">projects.md</span></a>
+      <a class="tab" href="#notebook"><span class="dot" style="background:var(--text-faint)"></span><span class="label">engineering-notebook.md</span></a>
+      <a class="tab" href="#contact"><span class="dot" style="background:var(--orange)"></span><span class="label">contact.md</span></a>
+    </div>
   </div>
 </nav>
 
-<main>
-  <section class="hero">
-    <div class="hero-tag">Open to opportunities · Remote / Relocation</div>
-    <h1>Abioye Jesse<br>Fredrick</h1>
-    <p class="hero-sub">Java backend developer with a Mathematics degree — building secure, distributed systems and documenting every architectural decision: what was chosen, what was rejected, and why. Strong foundation in formal reasoning applied directly to software design.</p>
-    <div class="hero-links">
-      <a class="btn btn-primary" href="https://github.com/Kunzoick" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-        GitHub
-      </a>
-      <a class="btn btn-ghost" href="https://linkedin.com/in/jesse-fredrick-aab48b242" target="_blank">LinkedIn</a>
-      <a class="btn btn-ghost" href="mailto:jesseyfredrick03@yahoo.com">Email</a>
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="comment-line"><span class="sl">//</span> backend engineer</div>
+        <h1 class="name">Kunzoick<span class="cursor"></span></h1>
+        <div class="role-line">const status = "open to backend roles"</div>
+
+        <p class="lede">
+          I build systems I can still explain months later — the decision, the tradeoff,
+          the place it's most likely to break first.
+        </p>
+
+        <div class="cta-row">
+          <a href="#projects" class="btn btn-primary" id="magnet1">View Projects →</a>
+          <a href="#contact" class="btn btn-outline" id="magnet2">Get In Touch</a>
+        </div>
+      </div>
+
+      <div class="code-panel">
+        <div class="code-titlebar">
+          <span class="tl-dot" style="background:#ff5f57"></span>
+          <span class="tl-dot" style="background:#febc2e"></span>
+          <span class="tl-dot" style="background:#28c840"></span>
+          <span class="fname">TrustEvaluator.java</span>
+        </div>
+        <div class="code-body">
+          <div class="code-line"><span class="ln">1</span><span class="cm">// axis 1: who you are (role)</span></div>
+          <div class="code-line"><span class="ln">2</span><span class="cm">// axis 2: how you've behaved (trust)</span></div>
+          <div class="code-line"><span class="ln">3</span><span class="cm">// these two axes never mix</span></div>
+          <div class="code-line"><span class="ln">4</span></div>
+          <div class="code-line"><span class="ln">5</span><span class="kw">public </span><span class="fn">Decision </span><span class="str">evaluate</span>(<span class="fn">Principal</span> p,</div>
+          <div class="code-line"><span class="ln">6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">TrustScore</span> t) {</div>
+          <div class="code-line"><span class="ln">7</span>&nbsp;&nbsp;<span class="kw">if </span>(!p.<span class="str">hasRole</span>(REQUIRED))</div>
+          <div class="code-line"><span class="ln">8</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return </span><span class="fn">Decision</span>.DENY;</div>
+          <div class="code-line"><span class="ln">9</span>&nbsp;&nbsp;<span class="kw">return </span>t.<span class="str">meetsThreshold</span>()</div>
+          <div class="code-line"><span class="ln">10</span>&nbsp;&nbsp;&nbsp;&nbsp;? <span class="fn">Decision</span>.ALLOW</div>
+          <div class="code-line"><span class="ln">11</span>&nbsp;&nbsp;&nbsp;&nbsp;: <span class="fn">Decision</span>.RESTRICT;</div>
+          <div class="code-line"><span class="ln">12</span>}</div>
+        </div>
+      </div>
+
+    <div class="ticker-wrap">
+      <div class="ticker">
+        <span>Java</span><span>Spring Boot</span><span>React</span><span>MySQL</span>
+        <span>MariaDB</span><span>Redis</span><span>RabbitMQ</span><span>Docker</span>
+        <span>Stripe</span><span>JWT</span><span>Flyway</span><span>GitHub Actions</span>
+        <span>Java</span><span>Spring Boot</span><span>React</span><span>MySQL</span>
+        <span>MariaDB</span><span>Redis</span><span>RabbitMQ</span><span>Docker</span>
+        <span>Stripe</span><span>JWT</span><span>Flyway</span><span>GitHub Actions</span>
+      </div>
     </div>
-  </section>
+  </div>
+</header>
 
-  <section id="projects">
-    <div class="section-label">Selected Projects</div>
-    <div class="projects-grid">
+<section id="about">
+  <div class="wrap">
+    <div class="file-tab-label"><span class="dot" style="background:var(--blue)"></span>about.md</div>
+    <h2 class="section-title">Documentation isn't overhead</h2>
+    <p class="section-intro">
+      Most of the value in a system is in the parts nobody sees — why one approach was
+      rejected, what the failure path does, where the known limits are. That gets written
+      down before the sprint ends, not after someone asks.
+    </p>
 
-      <div class="project-card">
-        <div class="project-header">
-          <div><div class="project-title">Trust-Aware Incident Intelligence API</div></div>
-          <span class="project-year">2026</span>
-        </div>
-        <p class="project-desc">REST API where every request is evaluated by both role and behavioural trust score. The architectural core — role and trust score never influence each other — is enforced as a hard constraint, not a convention.</p>
-        <ul class="project-bullets">
-          <li>JWT auth with 5-min TTL; opaque refresh tokens hashed SHA-256; token reuse detection revokes the entire family atomically</li>
-          <li>Redis rate limiting across four trust tiers — fail-open by design; auth has zero Redis dependency</li>
-          <li>Transactional outbox: incident event and outbox row written in one transaction, survives broker failure</li>
-          <li>Correlation ID traces every request across filters, services, error responses, and audit logs</li>
-          <li>Flyway owns the schema (V1–V8); Hibernate DDL disabled</li>
-        </ul>
-        <div class="tag-row">
-          <span class="tag accent">Java 23</span><span class="tag">Spring Boot 3.5</span><span class="tag">MariaDB</span><span class="tag">Redis</span><span class="tag">RabbitMQ</span><span class="tag">JWT</span>
-        </div>
-        <a class="project-link" href="https://github.com/Kunzoick" target="_blank">View on GitHub ↗</a>
+    <div class="about-grid">
+      <div class="about-card"><div class="tag-dot" style="background:var(--green)"></div>
+        <h4>backend/</h4>
+        <p>Java 17–23, Spring Boot, Spring Security, JWT, Flyway, transactional design</p>
       </div>
-
-      <div class="project-card">
-        <div class="project-header">
-          <div><div class="project-title">Async Incident Processing Pipeline</div></div>
-          <span class="project-year">2026</span>
-        </div>
-        <p class="project-desc">Event-driven consumer for incident events. Six failure scenarios explicitly handled — each with a documented recovery path verified by database query.</p>
-        <ul class="project-bullets">
-          <li>Exponential backoff at 2s / 4s / 8s; messages exceeding 3 attempts routed to DLQ and marked DEAD</li>
-          <li>ProcessingWatchdog detects records stuck in PROCESSING beyond 8s and requeues them</li>
-          <li>Idempotency via eventId uniqueness — duplicates acknowledged and skipped</li>
-          <li>ADRs written for broker choice, retry strategy, idempotency, and outbox integration</li>
-        </ul>
-        <div class="tag-row">
-          <span class="tag accent">Java 21</span><span class="tag">Spring Boot 3.5</span><span class="tag">RabbitMQ</span><span class="tag">MariaDB</span><span class="tag">Docker</span>
-        </div>
-        <a class="project-link" href="https://github.com/Kunzoick" target="_blank">View on GitHub ↗</a>
+      <div class="about-card"><div class="tag-dot" style="background:var(--blue)"></div>
+        <h4>data-messaging/</h4>
+        <p>MySQL, MariaDB, Redis, RabbitMQ, Testcontainers for real integration tests</p>
       </div>
-
-      <div class="project-card">
-        <div class="project-header">
-          <div><div class="project-title">Calculus API — Symbolic Math Engine</div></div>
-          <span class="project-year">2026</span>
-        </div>
-        <p class="project-desc">REST API exposing a symbolic mathematics engine built entirely from scratch — no external math libraries. A direct application of undergraduate analysis: hand-coded from theory to deployed API.</p>
-        <ul class="project-bullets">
-          <li>Hand-coded tokenizer, recursive descent parser, AST, differentiator, integrator, simplifier, and printer</li>
-          <li>Supports differentiation, integration by parts, implicit differentiation, variable exponents, and inverse trig</li>
-          <li>Engine is fully testable in isolation without starting the Spring context</li>
-          <li>Live public frontend deployed on Railway</li>
-        </ul>
-        <div class="tag-row">
-          <span class="tag accent">Java 21</span><span class="tag">Spring Boot 3.4</span><span class="tag">Railway</span><span class="tag">HTML/CSS/JS</span>
-        </div>
-        <a class="project-link" href="https://calculus-api-production.up.railway.app" target="_blank">Live Demo ↗</a>
+      <div class="about-card"><div class="tag-dot" style="background:var(--red)"></div>
+        <h4>frontend/</h4>
+        <p>React, Tailwind CSS — enough to ship a working customer-facing app end to end</p>
       </div>
-
-      <div class="project-card">
-        <div class="project-header">
-          <div><div class="project-title">Student Management System</div></div>
-          <span class="project-year">2025</span>
-        </div>
-        <p class="project-desc">Desktop application managing the full academic lifecycle across a multi-admin institution — built without Spring, Hibernate, or any ORM.</p>
-        <ul class="project-bullets">
-          <li>Four strict layers: UI → Service → DAO → Database; SwingWorker threading across 20 frames — EDT never blocks</li>
-          <li>Multi-admin isolation enforced at SQL level via adminId sentinel pattern — eliminates a class of data leakage bugs</li>
-          <li>Full code review: 15 critical and 8 high-severity bugs identified, root-caused, and documented</li>
-        </ul>
-        <div class="tag-row">
-          <span class="tag accent">Java 17</span><span class="tag">Swing</span><span class="tag">JDBC</span><span class="tag">MySQL</span>
-        </div>
-        <a class="project-link" href="https://github.com/Kunzoick" target="_blank">View on GitHub ↗</a>
+      <div class="about-card"><div class="tag-dot" style="background:var(--orange)"></div>
+        <h4>practice/</h4>
+        <p>ADRs before code, bug logs with root cause, CI on every push, Docker deploys</p>
       </div>
-
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="education">
-    <div class="section-label">Education</div>
+<section id="projects">
+  <div class="wrap">
+    <div class="file-tab-label"><span class="dot" style="background:var(--green)"></span>projects.md</div>
+    <h2 class="section-title">Things I've built</h2>
+    <p class="section-intro">
+      Not a highlight reel — each one has a document explaining what was decided,
+      what was rejected, and what's still not solved.
+    </p>
 
-    <div class="edu-feature">
-      <div class="edu-feature-label">B.Sc. (Ed) Pure Mathematics · Completed · 2025</div>
-      <div class="edu-feature-title">Pure Mathematics Degree</div>
-      <div class="edu-feature-inst">University — Graduated 2025</div>
-      <p class="edu-feature-body">
-        A rigorous foundation in formal mathematical reasoning — the same discipline that underpins type systems, algorithm correctness, and AI model evaluation. Core areas span both pure theory and applied mathematics.
+    <!-- BarnCart — green: full-stack, live, deployed -->
+    <div class="project-card" style="border-top:3px solid var(--green)">
+      <div class="project-top">
+        <div class="project-name">BarnCart</div>
+        <div class="project-links">
+          <a class="icon-btn" href="https://barncart-frontend.vercel.app" target="_blank" rel="noopener" aria-label="Live demo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+          </a>
+          <a class="icon-btn" href="https://github.com/Kunzoick/barncart-backend" target="_blank" rel="noopener" aria-label="Backend repo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.07 0 0 .97-.31 3.19 1.18a11.1 11.1 0 0 1 5.8 0c2.22-1.49 3.19-1.18 3.19-1.18.63 1.6.23 2.78.11 3.07.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.42.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <p class="project-desc">
+        Farm-to-customer e-commerce, built and deployed end to end — auth, live inventory,
+        Stripe checkout, delivery scheduling, disputes, an admin panel. Frontend and backend
+        are separate repos, both deployed.
       </p>
-      <div class="edu-areas">
-        <span class="edu-area">Abstract Algebra</span>
-        <span class="edu-area">Linear Algebra</span>
-        <span class="edu-area">Real Analysis</span>
-        <span class="edu-area">Complex Analysis</span>
-        <span class="edu-area">Functional Analysis</span>
-        <span class="edu-area">Topology</span>
-        <span class="edu-area">ODE &amp; PDE</span>
-        <span class="edu-area">Probability</span>
-        <span class="edu-area">Statistics</span>
-        <span class="edu-area">Applied Mathematics</span>
+
+      <div class="carousel" id="barncart-carousel">
+        <div class="carousel-track">
+          <img class="carousel-img" src="assets/barncart-preview.png" alt="BarnCart homepage with live stock ticker and produce listings" />
+          <img class="carousel-img" src="assets/barncart-listings.png" alt="BarnCart full produce catalog with category filters" />
+          <img class="carousel-img" src="assets/barncart-admin.png" alt="BarnCart admin dashboard showing orders, revenue and stock stats" />
+          <img class="carousel-img" src="assets/barncart-checkout.png" alt="BarnCart checkout delivery slot selection" />
+        </div>
+        <button class="carousel-btn carousel-prev" aria-label="Previous screenshot">&#x2039;</button>
+        <button class="carousel-btn carousel-next" aria-label="Next screenshot">&#x203A;</button>
+        <div class="carousel-counter">
+          <span id="carousel-current">1</span> / <span id="carousel-total">4</span>
+        </div>
       </div>
-      <div class="edu-engine-callout">
-        <strong>Applied directly:</strong> Built a symbolic calculus engine in Java as a hands-on extension of undergraduate analysis — hand-coded differentiator, integrator, and AST with no external libraries. Theory translated into working, deployed software.
+      
+      <div class="diff-header"><span class="a">--- a/challenge</span><span class="b">+++ b/solution</span></div>
+      <div class="diff-grid">
+        <div class="diff-col problem">
+          <p class="diff-line"><span class="mark">-</span> Multi-item orders only ever saved the last item — no exception, nothing in the logs</p>
+          <p class="diff-line"><span class="mark">-</span> Root cause was a cache-clearing query silently wiping unflushed inserts mid-loop</p>
+        </div>
+        <div class="diff-col solution">
+          <p class="diff-line"><span class="mark">+</span> Confirmed with a direct DB query, not app logs — <span class="mono" style="color:var(--green)">COUNT(*)</span> told the real story</p>
+          <p class="diff-line"><span class="mark">+</span> Fixed the flush, then traced the same bad assumption into six other call sites</p>
+        </div>
+      </div>
+
+      <div class="results-row">
+        <div><span class="num">15</span> ADRs written after deployment</div>
+        <div><span class="num">21</span> bugs logged with root cause</div>
+        <div>Live on Render + Vercel + Aiven MySQL</div>
+      </div>
+
+      <div class="tags">
+        <span class="tag">Spring Boot 3.5</span><span class="tag">React</span><span class="tag">MySQL</span>
+        <span class="tag">Stripe</span><span class="tag">WebSocket</span><span class="tag">Docker</span>
       </div>
     </div>
 
-    <div class="edu-secondary">
-      <div>
-        <div class="edu-secondary-title">Diploma in Java Development</div>
-        <div class="edu-secondary-sub">NIIT Institute · In Progress — Core language, OOP, and application development</div>
+    <!-- Multi-Tenant API — orange: security focus -->
+    <div class="project-card" style="border-top:3px solid var(--orange)">
+      <div class="project-top">
+        <div class="project-name">Multi-Tenant Secure API</div>
+        <div class="project-links">
+          <a class="icon-btn" href="https://github.com/Kunzoick/multitenant-api" target="_blank" rel="noopener" aria-label="Repo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.07 0 0 .97-.31 3.19 1.18a11.1 11.1 0 0 1 5.8 0c2.22-1.49 3.19-1.18 3.19-1.18.63 1.6.23 2.78.11 3.07.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.42.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          </a>
+        </div>
       </div>
-      <span class="edu-secondary-badge">In Progress</span>
-    </div>
-  </section>
+      <p class="project-desc">
+        Contract-first multi-tenant REST API. The core bet: tenant isolation shouldn't depend
+        on anyone remembering a WHERE clause.
+      </p>
 
-  <section id="skills">
-    <div class="section-label">Technical Skills</div>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <div class="skill-group-title">Languages</div>
-        <div class="skill-list"><span class="skill-pill">Java 23/21/17</span><span class="skill-pill">SQL</span><span class="skill-pill">JavaScript</span></div>
+      <div class="diff-header"><span class="a">--- a/risk</span><span class="b">+++ b/approach</span></div>
+      <div class="diff-grid">
+        <div class="diff-col problem">
+          <p class="diff-line"><span class="mark">-</span> A single missed tenant filter in any repository method leaks data across tenants</p>
+        </div>
+        <div class="diff-col solution">
+          <p class="diff-line"><span class="mark">+</span> Tenant scope enforced structurally in a base repository — no query path can skip it</p>
+          <p class="diff-line"><span class="mark">+</span> JWT revocation via Redis JTI blacklist, with refresh token reuse detection</p>
+        </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Frameworks</div>
-        <div class="skill-list"><span class="skill-pill">Spring Boot 3.5</span><span class="skill-pill">Spring Security</span><span class="skill-pill">Spring Data JPA</span></div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Databases & Messaging</div>
-        <div class="skill-list"><span class="skill-pill">MariaDB</span><span class="skill-pill">MySQL</span><span class="skill-pill">Flyway</span><span class="skill-pill">RabbitMQ</span><span class="skill-pill">Redis</span></div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Auth & Security</div>
-        <div class="skill-list"><span class="skill-pill">JWT</span><span class="skill-pill">Opaque Tokens</span><span class="skill-pill">Token Reuse Detection</span><span class="skill-pill">RBAC</span></div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Infrastructure</div>
-        <div class="skill-list"><span class="skill-pill">Docker</span><span class="skill-pill">Railway</span><span class="skill-pill">Maven</span><span class="skill-pill">Git</span></div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Concepts</div>
-        <div class="skill-list"><span class="skill-pill">Distributed Systems</span><span class="skill-pill">Event-Driven Arch</span><span class="skill-pill">Idempotency</span><span class="skill-pill">ADRs</span><span class="skill-pill">Failure Semantics</span></div>
-      </div>
-    </div>
-  </section>
 
-  <section id="contact">
-    <div class="section-label">About & Contact</div>
-    <div class="two-col">
-      <div>
-        <p class="about-text">Mathematics degree. Backend engineering. Every decision documented.<br><br>I bring formal reasoning from pure mathematics into software design — not as a talking point, but as a working habit. Correctness is argued, not assumed. That applies to code, architecture, and how I communicate technical ideas to others.<br><br>Open to backend and AI training roles where analytical rigour and clear technical documentation are valued.</p>
+      <div class="results-row">
+        <div><span class="num">39</span> tests against real MariaDB + Redis</div>
+        <div><span class="num">10</span> ADRs, <span class="num">16</span> bugs logged</div>
+        <div>CI runs full suite on every push</div>
       </div>
-      <div class="contact-block">
-        <div class="contact-item">
-          <div class="contact-icon">✉</div>
-          <div>
-            <div class="contact-label">Email</div>
-            <a href="mailto:jesseyfredrick03@yahoo.com" class="contact-value">jesseyfredrick03@yahoo.com</a>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--ink2)"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-          </div>
-          <div>
-            <div class="contact-label">GitHub</div>
-            <a href="https://github.com/Kunzoick" target="_blank" class="contact-value">github.com/Kunzoick</a>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">in</div>
-          <div>
-            <div class="contact-label">LinkedIn</div>
-            <a href="https://linkedin.com/in/jesse-fredrick-aab48b242" target="_blank" class="contact-value">jesse-fredrick</a>
-          </div>
-        </div>
+
+      <div class="tags">
+        <span class="tag">Java 21</span><span class="tag">Spring Boot 3.5</span><span class="tag">MariaDB</span>
+        <span class="tag">Redis</span><span class="tag">JWT</span><span class="tag">GitHub Actions</span>
       </div>
     </div>
-  </section>
-</main>
+
+    <!-- Trust API — orange: security focus -->
+    <div class="project-card" style="border-top:3px solid var(--orange)">
+      <div class="project-top">
+        <div class="project-name">Trust-Aware Incident Intelligence API</div>
+        <div class="project-links">
+          <a class="icon-btn" href="https://github.com/Kunzoick/zoick-incident-api" target="_blank" rel="noopener" aria-label="Repo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.07 0 0 .97-.31 3.19 1.18a11.1 11.1 0 0 1 5.8 0c2.22-1.49 3.19-1.18 3.19-1.18.63 1.6.23 2.78.11 3.07.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.42.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <p class="project-desc">
+        A REST API where every request is judged on two separate axes — who the user is,
+        and how trustworthy their recent behavior has been.
+      </p>
+
+      <div class="diff-header"><span class="a">--- a/rule</span><span class="b">+++ b/build</span></div>
+      <div class="diff-grid">
+        <div class="diff-col problem">
+          <p class="diff-line"><span class="mark">-</span> Role and trust score must never be allowed to mix — that boundary is the whole design</p>
+        </div>
+        <div class="diff-col solution">
+          <p class="diff-line"><span class="mark">+</span> Stateless JWT with reuse detection — a stolen token revokes its entire family, atomically</p>
+          <p class="diff-line"><span class="mark">+</span> Redis-backed rate limiting fails open, so an outage never locks out a real user</p>
+        </div>
+      </div>
+
+      <div class="results-row">
+        <div>Outbox pattern — no event lost mid-publish</div>
+        <div>Correlation ID tracing on every request</div>
+      </div>
+
+      <div class="tags">
+        <span class="tag">Java 23</span><span class="tag">Spring Boot 3.5</span><span class="tag">MariaDB</span>
+        <span class="tag">Redis</span><span class="tag">RabbitMQ</span>
+      </div>
+    </div>
+
+    <!-- Pipeline — blue: async/messaging -->
+    <div class="project-card" style="border-top:3px solid var(--blue)">
+      <div class="project-top">
+        <div class="project-name">Async Incident Processing Pipeline</div>
+        <div class="project-links">
+          <a class="icon-btn" href="https://github.com/Kunzoick/zoick-pipeline" target="_blank" rel="noopener" aria-label="Repo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.07 0 0 .97-.31 3.19 1.18a11.1 11.1 0 0 1 5.8 0c2.22-1.49 3.19-1.18 3.19-1.18.63 1.6.23 2.78.11 3.07.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.42.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <p class="project-desc">
+        Consumes the events the Trust API publishes. The interesting part isn't the happy
+        path — it's what happens when a message fails halfway through.
+      </p>
+
+      <div class="diff-header"><span class="a">--- a/failure-modes</span><span class="b">+++ b/handling</span></div>
+      <div class="diff-grid">
+        <div class="diff-col problem">
+          <p class="diff-line"><span class="mark">-</span> Retries, dead letters, duplicate delivery, records stuck mid-processing</p>
+        </div>
+        <div class="diff-col solution">
+          <p class="diff-line"><span class="mark">+</span> Outbox on the producer side, idempotency on the consumer side</p>
+          <p class="diff-line"><span class="mark">+</span> A watchdog process that finds and recovers anything stuck</p>
+        </div>
+      </div>
+
+      <div class="tags">
+        <span class="tag">Java 21</span><span class="tag">Spring Boot</span><span class="tag">RabbitMQ</span><span class="tag">MySQL</span>
+      </div>
+    </div>
+
+    <!-- Calculus API — blue: algorithms -->
+    <div class="project-card" style="border-top:3px solid var(--blue)">
+      <div class="project-top">
+        <div class="project-name">Calculus API</div>
+        <div class="project-links">
+          <a class="icon-btn" href="https://calculus-api-production.up.railway.app" target="_blank" rel="noopener" aria-label="Live demo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+          </a>
+          <a class="icon-btn" href="https://github.com/Kunzoick/calculus-api" target="_blank" rel="noopener" aria-label="Repo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.07 0 0 .97-.31 3.19 1.18a11.1 11.1 0 0 1 5.8 0c2.22-1.49 3.19-1.18 3.19-1.18.63 1.6.23 2.78.11 3.07.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.42.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <p class="project-desc">
+        A symbolic math engine behind five HTTP endpoints — differentiation, integration,
+        implicit differentiation. No math library underneath any of it.
+      </p>
+
+      <div class="diff-header"><span class="a">--- a/constraint</span><span class="b">+++ b/engine</span></div>
+      <div class="diff-grid">
+        <div class="diff-col problem">
+          <p class="diff-line"><span class="mark">-</span> No external symbolic math library — the engine had to be written from scratch</p>
+        </div>
+        <div class="diff-col solution">
+          <p class="diff-line"><span class="mark">+</span> Hand-written tokenizer, parser, AST, differentiator, integrator, simplifier, printer</p>
+          <p class="diff-line"><span class="mark">+</span> Zero Spring dependency in the engine itself — fully testable on its own</p>
+        </div>
+      </div>
+
+      <div class="tags">
+        <span class="tag">Java 21</span><span class="tag">Spring Boot 3.4</span><span class="tag">Railway</span>
+      </div>
+    </div>
+
+    <!-- Student Management — muted: foundational work -->
+    <div class="project-card" style="border-top:3px solid var(--text-faint)">
+      <div class="project-top">
+        <div class="project-name">Student Management System</div>
+        <div class="project-links">
+          <a class="icon-btn" href="https://github.com/Kunzoick/student-management-system" target="_blank" rel="noopener" aria-label="Repo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.07 0 0 .97-.31 3.19 1.18a11.1 11.1 0 0 1 5.8 0c2.22-1.49 3.19-1.18 3.19-1.18.63 1.6.23 2.78.11 3.07.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.42.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <p class="project-desc">
+        A layered desktop app for a multi-admin institution. No Spring, no ORM — everything
+        wired by hand, mostly to see what those frameworks are usually doing for you.
+      </p>
+
+      <div class="diff-header"><span class="a">--- a/review</span><span class="b">+++ b/fixes</span></div>
+      <div class="diff-grid">
+        <div class="diff-col problem">
+          <p class="diff-line"><span class="mark">-</span> 15 critical and 8 high-severity issues found in a full pass over the codebase</p>
+        </div>
+        <div class="diff-col solution">
+          <p class="diff-line"><span class="mark">+</span> Every issue written up with its root cause, not just patched and forgotten</p>
+          <p class="diff-line"><span class="mark">+</span> SwingWorker contract enforced across 20 frames so the UI thread never blocks</p>
+        </div>
+      </div>
+
+      <div class="tags">
+        <span class="tag">Java 17</span><span class="tag">Swing</span><span class="tag">JDBC</span><span class="tag">MySQL</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="notebook">
+  <div class="wrap">
+    <div class="file-tab-label">
+      <span class="dot" style="background:var(--text-faint)"></span>engineering-notebook.md
+    </div>
+    <h2 class="section-title">Engineering Notebook</h2>
+    <p class="section-intro">
+      The decisions that shaped the architecture above, and the bugs that needed a root cause, not just a patch.
+    </p>
+    <div class="nb-tabs" role="tablist">
+      <button class="nb-tab active" data-filter="decision" role="tab" aria-selected="true">
+        Decisions (<span id="nb-count-decision">0</span>)
+      </button>
+      <button class="nb-tab" data-filter="bug" role="tab" aria-selected="false">
+        Bugs (<span id="nb-count-bug">0</span>)
+      </button>
+    </div>
+    <div id="nb-entries" role="tabpanel"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="file-tab-label"><span class="dot" style="background:var(--orange)"></span>contact.md</div>
+    <h2 class="section-title">Get in touch</h2>
+    <p class="section-intro">
+      Open to backend roles, or just talking through a system design. Email is the
+      most reliable way to reach me.
+    </p>
+
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:jesseyfredrick03@yahoo.com">
+        <div class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l9 7 9-7M3 6v12h18V6"/></svg></div>
+        <h5>email</h5>
+        <p>jesseyfredrick03@yahoo.com</p>
+      </a>
+      <a class="contact-card" href="http://www.linkedin.com/in/jesse-abioye-aab48b242" target="_blank" rel="noopener">
+        <div class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45Z"/></svg></div>
+        <h5>linkedin</h5>
+        <p>Jesse Abioye</p>
+      </a>
+      <a class="contact-card" href="https://github.com/Kunzoick" target="_blank" rel="noopener">
+        <div class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.07 0 0 .97-.31 3.19 1.18a11.1 11.1 0 0 1 5.8 0c2.22-1.49 3.19-1.18 3.19-1.18.63 1.6.23 2.78.11 3.07.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.42.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></div>
+        <h5>github</h5>
+        <p>@Kunzoick</p>
+      </a>
+    </div>
+  </div>
+</section>
 
 <footer>
-  Built with HTML · Hosted on GitHub Pages · github.com/Kunzoick
+  <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; width:100%;">
+    <span>kunzoick@portfolio:~$ <span class="cursor"></span></span>
+    <span style="color:var(--text-faint)">Jesse Abioye · built with plain html, on purpose</span>
+  </div>
 </footer>
+
+<script src="assets/data/notebook.js"></script>
+<script src="js/script.js"></script>
 
 </body>
 </html>
